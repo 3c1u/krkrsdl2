@@ -690,7 +690,11 @@ if get_option('builtin_plugin_enable_menu') == true
 		]
 	endif
 endif
-
+if target_machine.system() == 'darwin'
+	krkrsdl2_src += [
+		'src/core/base/macos/loader.cc',
+	]
+endif
 krkrsdl2_override_options = []
 if target_machine.system() == 'emscripten'
 	krkrsdl2_override_options += [
