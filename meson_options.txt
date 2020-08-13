@@ -48,6 +48,14 @@ option(
 	description: 'Enable the json plugin.'
 )
 
+
+option(
+	'builtin_plugin_enable_layerexbtoa',
+	type: 'boolean',
+	value: true,
+	description: 'Enable the layerExBTOA plugin.'
+)
+
 option(
 	'builtin_plugin_enable_layereximage',
 	type: 'boolean',
