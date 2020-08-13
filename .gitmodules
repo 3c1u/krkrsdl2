@@ -52,6 +52,9 @@
 [submodule "external/scriptsEx"]
 	path = external/scriptsEx
 	url = ../scriptsEx
+[submodule "external/layerExBTOA"]
+	path = external/layerExBTOA
+	url = ../layerExBTOA
 [submodule "external/PSBFile"]
 	path = external/PSBFile
 	url = https://github.com/3c1u/psbfile.git
