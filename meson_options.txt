@@ -112,6 +112,13 @@ option(
 )
 
 option(
+	'builtin_plugin_enable_psbfile',
+	type: 'boolean',
+	value: true,
+	description: 'Enable the PSBFile plugin.'
+)
+
+option(
 	'builtin_plugin_enable_menu',
 	type: 'boolean',
 	value: true,

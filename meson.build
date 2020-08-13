@@ -619,6 +619,12 @@ if get_option('builtin_plugin_enable_scriptsex') == true
 		'external/scriptsEx/Main.cpp',
 	]
 endif
+if get_option('builtin_plugin_enable_psbfile') == true
+	krkrsdl2_src += [
+		'external/PSBFile/PSBFile.cc',
+		'external/PSBFile/src/psb.cpp',
+	]
+endif
 if target_machine.system() == 'emscripten'
 	krkrsdl2_src += [
 		'src/plugins/kremscripten.cpp',
