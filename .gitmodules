@@ -58,3 +58,6 @@
 [submodule "external/PSBFile"]
 	path = external/PSBFile
 	url = https://github.com/3c1u/psbfile.git
+[submodule "external/TextRender"]
+	path = external/TextRender
+	url = https://github.com/3c1u/TextRender.git
