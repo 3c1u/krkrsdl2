@@ -57,4 +57,4 @@
 	url = https://github.com/3c1u/psbfile.git
 [submodule "external/layerExBTOA"]
 	path = external/layerExBTOA
-	url = https://github.com/uyjulian/layerExBTOA
+	url = ../layerExBTOA

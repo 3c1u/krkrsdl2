@@ -57,6 +57,13 @@ option(
 )
 
 option(
+	'builtin_plugin_enable_layerexbtoa',
+	type: 'boolean',
+	value: true,
+	description: 'Enable the layerExBTOA plugin.'
+)
+
+option(
 	'builtin_plugin_enable_layereximage',
 	type: 'boolean',
 	value: true,
@@ -131,6 +138,13 @@ option(
 	type: 'boolean',
 	value: true,
 	description: 'Enable the menu plugin. At the moment, only the Cocoa backend is supported.'
+)
+
+option(
+	'enable_coretext_rasterizer',
+	type: 'boolean',
+	value: false,
+	description: 'Enable CoreText font rasterizer for the macOS build. Minimum macOS version required >= 10.15.'
 )
 
 option(
