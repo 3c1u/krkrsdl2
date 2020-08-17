@@ -61,3 +61,6 @@
 [submodule "external/TextRender"]
 	path = external/TextRender
 	url = https://github.com/3c1u/TextRender.git
+[submodule "external/krglhwebp"]
+	path = external/krglhwebp
+	url = ../krglhwebp
