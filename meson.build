@@ -754,6 +754,11 @@ if get_option('builtin_plugin_enable_psbfile') == true
 		'external/PSBFile/src/psb.cpp',
 	]
 endif
+if get_option('builtin_plugin_enable_textrender') == true
+	krkrsdl2_src += [
+		'external/TextRender/textrender.cc',
+	]
+endif
 if target_machine.system() == 'emscripten'
 	krkrsdl2_src += [
 		'src/plugins/kremscripten.cpp',
@@ -779,7 +784,7 @@ if target_machine.system() == 'emscripten'
 endif
 krkrsdl2_cppflags = []
 krkrsdl2_cppflags += krkrsdl2_cflags
-krkrsdl2_cppflags += ['-std=c++11']
+krkrsdl2_cppflags += ['-std=c++17']
 if cxx.get_id() == 'gcc'
 	krkrsdl2_cppflags += ['-fno-delete-null-pointer-checks']
 endif
