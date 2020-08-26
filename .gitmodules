@@ -1,60 +1,60 @@
 [submodule "external/krkrz"]
 	path = external/krkrz
-	url = ../krkrz
+	url = https://github.com/uyjulian/krkrz
 [submodule "external/SamplePlugin"]
 	path = external/SamplePlugin
-	url = ../SamplePlugin
+	url = https://github.com/uyjulian/SamplePlugin
 [submodule "external/KAGParser"]
 	path = external/KAGParser
-	url = ../KAGParser
+	url = https://github.com/uyjulian/KAGParser
 [submodule "external/ncbind"]
 	path = external/ncbind
-	url = ../ncbind
+	url = https://github.com/uyjulian/ncbind
 [submodule "external/varfile"]
 	path = external/varfile
-	url = ../varfile
+	url = https://github.com/uyjulian/varfile
 [submodule "external/getSample"]
 	path = external/getSample
-	url = ../getSample
+	url = https://github.com/uyjulian/getSample
 [submodule "external/json"]
 	path = external/json
-	url = ../json
+	url = https://github.com/uyjulian/json
 [submodule "external/saveStruct"]
 	path = external/saveStruct
-	url = ../saveStruct
+	url = https://github.com/uyjulian/saveStruct
 [submodule "external/csvParser"]
 	path = external/csvParser
-	url = ../csvParser
+	url = https://github.com/uyjulian/csvParser
 [submodule "external/fstat"]
 	path = external/fstat
-	url = ../fstat
+	url = https://github.com/uyjulian/fstat
 [submodule "external/layerEx"]
 	path = external/layerEx
-	url = ../layerEx
+	url = https://github.com/uyjulian/layerEx
 [submodule "external/layerExDraw"]
 	path = external/layerExDraw
-	url = ../layerExDraw
+	url = https://github.com/uyjulian/layerExDraw
 [submodule "external/layerExImage"]
 	path = external/layerExImage
-	url = ../layerExImage
+	url = https://github.com/uyjulian/layerExImage
 [submodule "external/wuvorbis"]
 	path = external/wuvorbis
-	url = ../wuvorbis
+	url = https://github.com/uyjulian/wuvorbis
 [submodule "external/kri18n"]
 	path = external/kri18n
-	url = ../kri18n
+	url = https://github.com/uyjulian/kri18n
 [submodule "external/kratrac9"]
 	path = external/kratrac9
-	url = ../kratrac9
+	url = https://github.com/uyjulian/kratrac9
 [submodule "external/ksupport"]
 	path = external/ksupport
-	url = ../ksupport
+	url = https://github.com/uyjulian/ksupport
 [submodule "external/scriptsEx"]
 	path = external/scriptsEx
-	url = ../scriptsEx
+	url = https://github.com/uyjulian/scriptsEx
 [submodule "external/layerExBTOA"]
 	path = external/layerExBTOA
-	url = ../layerExBTOA
+	url = https://github.com/uyjulian/layerExBTOA
 [submodule "external/PSBFile"]
 	path = external/PSBFile
 	url = https://github.com/3c1u/psbfile.git
@@ -63,4 +63,4 @@
 	url = https://github.com/3c1u/TextRender.git
 [submodule "external/krglhwebp"]
 	path = external/krglhwebp
-	url = ../krglhwebp
+	url = https://github.com/uyjulian/krglhwebp
