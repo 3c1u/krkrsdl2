@@ -477,6 +477,7 @@ public:
 	virtual void SetPosition(tjs_int l, tjs_int t) override;
 	virtual TVPSDLBitmapCompletion *GetTVPSDLBitmapCompletion() override;
 	virtual void Show() override;
+	virtual void TickBeat() override;
 	virtual void InvalidateClose() override;
 	virtual bool GetWindowActive() override;
 	bool Closing = false, ProgramClosing = false, CanCloseWork = false;
@@ -1041,11 +1042,21 @@ TVPSDLBitmapCompletion *TVPWindowLayer::GetTVPSDLBitmapCompletion() {
 	return new TVPSDLBitmapCompletion(renderer, framebuffer, surface);
 }
 void TVPWindowLayer::Show() {
+}
+void TVPWindowLayer::TickBeat() {
 	if (needs_graphic_update)
 	{
 		if (renderer)
 		{
+			if (framebuffer)
+			{
+				SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
+			}
 			SDL_RenderPresent(renderer);
+			if (framebuffer)
+			{
+				SDL_RenderCopy(renderer, framebuffer, NULL, NULL);
+			}
 			hasDrawn = true;
 		}
 		else if (window && surface)
