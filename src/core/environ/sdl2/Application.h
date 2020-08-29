@@ -124,7 +124,6 @@ public:
 	~tTVPApplication();
 	bool StartApplication( int argc, tjs_char* argv[] );
 	void Run();
-	void ProcessMessages();
 
 	void PrintConsole( const tjs_char* mes, unsigned long len, bool iserror = false );
 	bool IsAttachConsole() { return is_attach_console_; }
@@ -202,12 +201,7 @@ public:
 
 #if 0
 	void PostMessageToMainWindow(UINT message, WPARAM wParam, LPARAM lParam);
-#endif
 
-	void PostUserMessage(const std::function<void()> &func, void* param1 = nullptr, int param2 = 0);
-	void FilterUserMessage(const std::function<void(std::vector<std::tuple<void*, int, tMsg> > &)> &func);
-
-#if 0
 	void ModalStarted( class tTVPWindow* form ) {
 		modal_window_stack_.push(form);
 	}
@@ -237,13 +231,6 @@ public:
 	 * 画像の非同期読込み要求
 	 */
 	void LoadImageRequest( class iTJSDispatch2 *owner, class tTJSNI_Bitmap* bmp, const ttstr &name );
-	void RegisterActiveEvent(void *host, const std::function<void(void*, eTVPActiveEvent)>& func/*empty = unregister*/);
-
-private:
-	SDL_mutex *m_msgQueueLock;
-
-	std::vector<std::tuple<void*, int, tMsg> > m_lstUserMsg;
-	std::map<void*, std::function<void(void*, eTVPActiveEvent)> > m_activeEvents;
 };
 #if 0
 std::vector<std::string>* LoadLinesFromFile( const tjs_string& path );

@@ -424,7 +424,6 @@ bool tTVPApplication::StartApplication( int argc, tjs_char* argv[] ) {
 	}
 #endif
 	TVPTerminateCode = 0;
-	m_msgQueueLock = SDL_CreateMutex();
 
 	CheckConsole();
 
@@ -693,15 +692,24 @@ void tTVPApplication::Run() {
 		if (tarminate_) {
 			return;
 		}
-		ProcessMessages();
+		bool done = false;
 		if (TVPSystemControl)
 		{
-			TVPSystemControl->ApplicationIdle();
+			done = TVPSystemControl->ApplicationIdle();
 		}
 		tjs_int count = TVPGetWindowCount();
 		for( tjs_int i = 0; i<count; i++ ) {
 			tTJSNI_Window *win = TVPGetWindowListAt(i);
 			win->TickBeat();
+		}
+		if (done)
+		{
+			if (SDL_WasInit(SDL_INIT_EVENTS) != 0)
+			{
+#ifndef __EMSCRIPTEN__
+				SDL_WaitEvent(NULL);
+#endif
+			}
 		}
 	} catch (const EAbort &) {
 		// nothing to do
@@ -726,19 +734,6 @@ void tTVPApplication::Run() {
 	} catch (...) {
 		ShowException((const tjs_char*)TVPUnknownError);
 	}
-}
-
-void tTVPApplication::ProcessMessages()
-{
-	std::vector<std::tuple<void*, int, tMsg> > lstUserMsg;
-	if (SDL_LockMutex(m_msgQueueLock) == 0) {
-		m_lstUserMsg.swap(lstUserMsg);
-		SDL_UnlockMutex(m_msgQueueLock);
-	}
-	for (std::tuple<void*, int, tMsg>& it : lstUserMsg) {
-		std::get<2>(it)();
-	}
-	// TVPTimer::ProgressAllTimer();
 }
 
 #if 0
@@ -898,22 +893,6 @@ void tTVPApplication::CheckDigitizer() {
 #endif
 }
 
-void tTVPApplication::PostUserMessage(const std::function<void()> &func, void* host, int msg)
-{
-	if (SDL_LockMutex(m_msgQueueLock) == 0) {
-		m_lstUserMsg.emplace_back(host, msg, func);
-		SDL_UnlockMutex(m_msgQueueLock);
-	}
-}
-
-void tTVPApplication::FilterUserMessage(const std::function<void(std::vector<std::tuple<void*, int, tMsg> > &)> &func)
-{
-	if (SDL_LockMutex(m_msgQueueLock) == 0) {
-		func(m_lstUserMsg);
-		SDL_UnlockMutex(m_msgQueueLock);
-	}
-}
-
 #if 0
 void tTVPApplication::OnActivate( HWND hWnd )
 #endif
@@ -929,9 +908,6 @@ void tTVPApplication::OnActivate()
 
 	// trigger System.onActivate event
 	TVPPostApplicationActivateEvent();
-	for (auto & it : m_activeEvents) {
-		it.second(it.first, eTVPActiveEvent::onActive);
-	}
 }
 
 #if 0
@@ -958,9 +934,6 @@ void tTVPApplication::OnDeactivate(  )
 
 	// trigger System.onDeactivate event
 	TVPPostApplicationDeactivateEvent();
-	for (auto & it : m_activeEvents) {
-		it.second(it.first, eTVPActiveEvent::onDeactive);
-	}
 }
 
 bool tTVPApplication::GetNotMinimizing() const
@@ -1000,14 +973,6 @@ void tTVPApplication::LoadImageRequest( class iTJSDispatch2 *owner, class tTJSNI
 		image_load_thread_->LoadRequest( owner, bmp, name );
 	}
 #endif
-}
-
-void tTVPApplication::RegisterActiveEvent(void *host, const std::function<void(void*, eTVPActiveEvent)>& func/*empty = unregister*/)
-{
-	if (func)
-		m_activeEvents.emplace(host, func);
-	else
-		m_activeEvents.erase(host);
 }
 
 #if 0

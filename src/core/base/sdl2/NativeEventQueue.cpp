@@ -70,20 +70,28 @@ void NativeEventQueueImplement::PostEvent( const NativeEvent& event ) {
 #endif
 
 #include "Application.h"
+#include "DebugIntf.h"
+#include <SDL.h>
 
-void NativeEventQueueImplement::PostEvent(const NativeEvent& ev) {
-	Application->PostUserMessage([this, ev](){ Dispatch(*const_cast<NativeEvent*>(&ev)); }, this);
+extern tjs_uint32 native_event_queue_custom_event_type = ((tjs_uint32)-1);
+
+NativeEventQueueImplement::NativeEventQueueImplement() {
+	if (native_event_queue_custom_event_type == ((tjs_uint32)-1))
+	{
+		SDL_Init(SDL_INIT_EVENTS);
+		native_event_queue_custom_event_type = SDL_RegisterEvents(1);
+	}
 }
 
-void NativeEventQueueImplement::Clear(int msg)
-{
-	Application->FilterUserMessage([this, msg](std::vector<std::tuple<void*, int, tTVPApplication::tMsg> > &lst){
-		for (auto it = lst.begin(); it != lst.end();) {
-			if (std::get<0>(*it) == this && (!msg || std::get<1>(*it) == msg)) {
-				it = lst.erase(it);
-			} else {
-				++it;
-			}
-		}
-	});
+void NativeEventQueueImplement::PostEvent(const NativeEvent& ev) {
+	if (native_event_queue_custom_event_type != ((tjs_uint32)-1))
+	{
+		SDL_Event event;
+		SDL_memset(&event, 0, sizeof(event));
+		event.type = native_event_queue_custom_event_type;
+		event.user.code = 0;
+		event.user.data1 = (void *)this;
+		event.user.data2 = (void *)&ev;
+		SDL_PushEvent(&event);
+	}
 }
