@@ -113,18 +113,21 @@ class tTVPApplication {
 	std::vector<char> console_cache_;
 
 private:
+#if 0
 	void CheckConsole();
 	void CloseConsole();
 	void CheckDigitizer();
+#endif
 	void ShowException( const tjs_char* e );
+#if 0
 	void Initialize() {}
+#endif
 
 public:
 	tTVPApplication();
 	~tTVPApplication();
 	bool StartApplication( int argc, tjs_char* argv[] );
 	void Run();
-	void ProcessMessages();
 
 	void PrintConsole( const tjs_char* mes, unsigned long len, bool iserror = false );
 	bool IsAttachConsole() { return is_attach_console_; }
@@ -133,17 +136,13 @@ public:
 
 #if 0
 	HWND GetHandle();
-#endif
 	bool IsIconic() {
-#if 0
 		HWND hWnd = GetHandle();
 		if( hWnd != INVALID_HANDLE_VALUE ) {
 			return 0 != ::IsIconic(hWnd);
 		}
-#endif
 		return true; // そもそもウィンドウがない
 	}
-#if 0
 	void Minimize();
 	void Restore();
 	void BringToFront();
@@ -187,27 +186,21 @@ public:
 #endif
 		tarminate_ = true;
 	}
+#if 0
 	void SetHintHidePause( int v ) {}
 	void SetShowHint( bool b ) {}
 	void SetShowMainForm( bool b ) {}
 
 
-#if 0
 	HWND GetMainWindowHandle() const;
 #endif
 
 	int ArgC;
 	tjs_char ** ArgV;
-	typedef std::function<void()> tMsg;
 
 #if 0
 	void PostMessageToMainWindow(UINT message, WPARAM wParam, LPARAM lParam);
-#endif
 
-	void PostUserMessage(const std::function<void()> &func, void* param1 = nullptr, int param2 = 0);
-	void FilterUserMessage(const std::function<void(std::vector<std::tuple<void*, int, tMsg> > &)> &func);
-
-#if 0
 	void ModalStarted( class tTVPWindow* form ) {
 		modal_window_stack_.push(form);
 	}
@@ -222,34 +215,23 @@ public:
 	void RegisterAcceleratorKey(HWND hWnd, char virt, short key, short cmd);
 	void UnregisterAcceleratorKey(HWND hWnd, short cmd);
 	void DeleteAcceleratorKeyTable( HWND hWnd );
-#endif
-	void OnActivate(  );
-	void OnDeactivate(  );
 
-#if 0
 	void OnActivate( HWND hWnd );
 	void OnDeactivate( HWND hWnd );
 #endif
 	bool GetActivating() const { return application_activating_; }
+#if 0
 	bool GetNotMinimizing() const;
+#endif
 
 	/**
 	 * 画像の非同期読込み要求
 	 */
 	void LoadImageRequest( class iTJSDispatch2 *owner, class tTJSNI_Bitmap* bmp, const ttstr &name );
-	void RegisterActiveEvent(void *host, const std::function<void(void*, eTVPActiveEvent)>& func/*empty = unregister*/);
-
-private:
-	SDL_mutex *m_msgQueueLock;
-
-	std::vector<std::tuple<void*, int, tMsg> > m_lstUserMsg;
-	std::map<void*, std::function<void(void*, eTVPActiveEvent)> > m_activeEvents;
 };
 #if 0
 std::vector<std::string>* LoadLinesFromFile( const tjs_string& path );
-#endif
 
-#if 0
 inline HINSTANCE GetHInstance() { return ((HINSTANCE)GetModuleHandle(0)); }
 #endif
 extern class tTVPApplication* Application;
