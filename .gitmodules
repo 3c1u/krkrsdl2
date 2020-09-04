@@ -64,3 +64,24 @@
 [submodule "external/krglhwebp"]
 	path = external/krglhwebp
 	url = https://github.com/uyjulian/krglhwebp
+[submodule "external/binaryStream"]
+	path = external/binaryStream
+	url = https://github.com/uyjulian//binaryStream
+[submodule "external/fftgraph"]
+	path = external/fftgraph
+	url = https://github.com/uyjulian//fftgraph
+[submodule "external/layerExAreaAverage"]
+	path = external/layerExAreaAverage
+	url = https://github.com/uyjulian//layerExAreaAverage
+[submodule "external/layerExLongExposure"]
+	path = external/layerExLongExposure
+	url = https://github.com/uyjulian//layerExLongExposure
+[submodule "external/layerExRaster"]
+	path = external/layerExRaster
+	url = https://github.com/uyjulian//layerExRaster
+[submodule "external/lineParser"]
+	path = external/lineParser
+	url = https://github.com/uyjulian//lineParser
+[submodule "external/shrinkCopy"]
+	path = external/shrinkCopy
+	url = https://github.com/uyjulian//shrinkCopy
